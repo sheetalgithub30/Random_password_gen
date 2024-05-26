@@ -18,7 +18,7 @@ function App() {
   function checked(e){
     if(e.target.checked){
       setCheckbox([...checkbox,characters[e.target.value]]);
-\    }  
+    }  
     else{
       setCheckbox(checkbox.filter((ch)=>{
           return ch !== characters[e.target.value];
