@@ -1,0 +1,45 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    font-family: cursive;
+}
+
+#container{
+  width: 50vw;
+  margin: 10rem auto;
+  border: 1px solid black;
+  line-height: 1.5;
+  padding: 1rem;
+}
+#input{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+h1,#password{
+    text-align: center;
+    margin: 1rem;
+}
+#password input{
+    font-size: 1.4rem;
+}
+#password button{
+    font-size: 1.5rem;
+    background-color: rgb(178, 238, 238);
+}
+#button{
+    text-align: center;
+}
+#generate{
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    border-radius:20px;
+    color: white;
+    font-weight: 900;
+    background-color: blue;
+    border: none;
+}
+#container div{
+    font-size: 1.3rem;
+}
