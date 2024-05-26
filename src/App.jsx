@@ -8,15 +8,27 @@ function App() {
 
   const[checkbox,setCheckbox] = useState([]);
 
-   const numbers ='0123456789';
-  const upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const lowerCase = 'abcdefghijklmnopqrstuvwxyz';
-  const symbols = '!@#$%^&*()_<>?{}~';
+  const characters ={
+   numbers : '0123456789',
+   upperCase : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+   lowerCase : 'abcdefghijklmnopqrstuvwxyz',
+   symbols : '!@#$%^&*()_<>?{}~'
+  }
+
+  function checked(e){
+    if(e.target.checked){
+      setCheckbox([...checkbox,characters[e.target.value]]);
+\    }  
+    else{
+      setCheckbox(checkbox.filter((ch)=>{
+          return ch !== characters[e.target.value];
+      }));
+    }  
+  }
   
   
  
    function generatePassword(){
-      
         console.log(length);
 
         if(length<8 || length>50){
@@ -30,26 +42,20 @@ function App() {
           return;
         }
 
-        console.log(checkbox);
-        let terms =[];
-        checkbox.map((e)=>{
-          //  console.log(e);
-           terms+= eval(...e);
-           console.log(terms);
-        })
+      const terms = checkbox.join("");
        
         let pass = '';
         for(let i=0;i<length;i++){
-          let index =  Math.floor(Math.random()*terms.length);
-          pass+= terms[index];
+          pass += terms[Math.floor(Math.random()*terms.length)];
+          
         }
         setText(pass);
-        
    }
 
    function copy(){
     navigator.clipboard.writeText(text);
     alert("Password Copied!!!");
+    location.reload();
    }
 
   return (
@@ -61,20 +67,20 @@ function App() {
      </div>
      <div id="input">
       <label>Select Password length (**8-50 characters**)</label>
-      <input type="number" placeholder='8' onChange={e=>setLength(e.target.value)}></input>
+      <input type="number" placeholder='0' onChange={e=>setLength(e.target.value)}></input>
      </div>
     
 
-     <div id="checkox">
-      <input type="checkbox" id="upperCase" onChange={e=>setCheckbox([...checkbox,e.target.id])}></input><label>Include Upper Case</label>
+     <div id="checkbox">
+      <input type="checkbox" id="upperCase" value ="upperCase" onChange={(e)=>checked(e)} ></input><label>Include Upper Case</label>
       <br></br>
-      <input type="checkbox" id="lowerCase" onChange={e=>setCheckbox([...checkbox,e.target.id])}></input><label>Include Lower Case</label>
+      <input type="checkbox" id="lowerCase" value = "lowerCase" onChange={(e)=>checked(e)}></input><label>Include Lower Case</label>
       <br></br>
-      <input type="checkbox" id="numbers" onChange={e=>setCheckbox([...checkbox,e.target.id])}></input><label>Include Numbers</label>
+      <input type="checkbox" id="numbers" value="numbers" onChange={(e)=>checked(e)}></input><label>Include Numbers</label>
       <br></br>
-      <input type="checkbox" id="symbols" onChange={e=>setCheckbox([...checkbox,e.target.id])}></input><label>Include Symbols</label>
+      <input type="checkbox" id="symbols" value="symbols" onChange={(e)=>checked(e)} ></input><label>Include Symbols</label>
      </div>
-<div id="button">
+     <div id="button">
      <button onClick={generatePassword} id="generate">Generate Password</button>
      </div>
     </div>
